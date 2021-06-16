@@ -1,0 +1,1525 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<PMML xmlns="http://www.dmg.org/PMML-4_3" xmlns:data="http://jpmml.org/jpmml-model/InlineTable" version="4.3">
+	<Header>
+		<Application name="JPMML-LightGBM" version="1.2.3"/>
+		<Timestamp>2021-06-09T08:22:39Z</Timestamp>
+	</Header>
+	<DataDictionary>
+		<DataField name="_target" optype="categorical" dataType="string">
+			<Value value="0"/>
+			<Value value="1"/>
+		</DataField>
+		<DataField name="petal_length" optype="continuous" dataType="double">
+			<Interval closure="closedClosed" leftMargin="1.0" rightMargin="5.1"/>
+		</DataField>
+	</DataDictionary>
+	<MiningModel functionName="classification" algorithmName="LightGBM">
+		<MiningSchema>
+			<MiningField name="_target" usageType="target"/>
+			<MiningField name="petal_length" importance="119.0"/>
+		</MiningSchema>
+		<Segmentation multipleModelMethod="modelChain">
+			<Segment id="1">
+				<True/>
+				<MiningModel functionName="regression">
+					<MiningSchema>
+						<MiningField name="petal_length"/>
+					</MiningSchema>
+					<Output>
+						<OutputField name="lgbmValue" optype="continuous" dataType="double" feature="predictedValue" isFinalResult="false"/>
+						<OutputField name="transformedLgbmValue" optype="continuous" dataType="double" feature="transformedValue" isFinalResult="false">
+							<Apply function="/">
+								<Constant dataType="double">1.0</Constant>
+								<Apply function="+">
+									<Constant dataType="double">1.0</Constant>
+									<Apply function="exp">
+										<Apply function="*">
+											<Constant dataType="double">-1.0</Constant>
+											<FieldRef field="lgbmValue"/>
+										</Apply>
+									</Apply>
+								</Apply>
+							</Apply>
+						</OutputField>
+					</Output>
+					<Segmentation multipleModelMethod="sum">
+						<Segment id="1">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.46666653069534164">
+									<True/>
+									<Node score="0.3413765610074013">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="2">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04881267492663224">
+									<True/>
+									<Node score="-0.0722064872718705">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="3">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.047916430727615644">
+									<True/>
+									<Node score="-0.06926633553762344">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="4">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04707818440880812">
+									<True/>
+									<Node score="-0.06663855710004053">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.04707818440880814">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="5">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04629280559916142">
+									<True/>
+									<Node score="-0.06427658783806235">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="6">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04555575420789161">
+									<True/>
+									<Node score="-0.06214271788559341">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="7">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04486299865684758">
+									<True/>
+									<Node score="-0.06020608547919031">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="8">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.044210939676037085">
+									<True/>
+									<Node score="-0.05844115329067891">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="9">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04359634612163909">
+									<True/>
+									<Node score="-0.056826656880059896">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.0435963461216391">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="10">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04301632797973837">
+									<True/>
+									<Node score="-0.055344693451612005">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="11">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.042468287947192596">
+									<True/>
+									<Node score="-0.05398010847170131">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="12">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.041949865577613925">
+									<True/>
+									<Node score="-0.05271997516482198">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.04194986557761394">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="13">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04145893770053268">
+									<True/>
+									<Node score="-0.051553207354131735">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="14">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04099357581162598">
+									<True/>
+									<Node score="-0.05047022262109169">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="15">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04055202414089631">
+									<True/>
+									<Node score="-0.04946272628353382">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="16">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.04013267646204733">
+									<True/>
+									<Node score="-0.048523466148661466">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="17">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.039734081711472316">
+									<True/>
+									<Node score="-0.0476461032467246">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.039734081711472295">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="18">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.039354888873136276">
+									<True/>
+									<Node score="-0.046825050360789794">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="19">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.038993875022032665">
+									<True/>
+									<Node score="-0.04605537523792324">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="20">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03864992277692546">
+									<True/>
+									<Node score="-0.045332709847581955">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="21">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03832198004503449">
+									<True/>
+									<Node score="-0.044653154038499954">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="22">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.0380090999436618">
+									<True/>
+									<Node score="-0.04401324027758523">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="23">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03771039481397559">
+									<True/>
+									<Node score="-0.04340984740739995">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.03771039481397559">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="24">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03742504519227552">
+									<True/>
+									<Node score="-0.04284018002448915">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="25">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.037152297293722075">
+									<True/>
+									<Node score="-0.04230172463746544">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="26">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03689144995466613">
+									<True/>
+									<Node score="-0.04179218990444053">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="27">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.036641847018027494">
+									<True/>
+									<Node score="-0.041309525335232786">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.036641847018027494">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="28">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03640288248286881">
+									<True/>
+									<Node score="-0.040851853702110606">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="29">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03617398820076387">
+									<True/>
+									<Node score="-0.040417466714230736">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="30">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.035954642705521456">
+									<True/>
+									<Node score="-0.0400048133071655">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="31">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03574435146434269">
+									<True/>
+									<Node score="-0.03961247549684166">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="32">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.035542647207993085">
+									<True/>
+									<Node score="-0.03923914479467661">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.03554264720799309">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="33">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03534910513323968">
+									<True/>
+									<Node score="-0.03888362604931444">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="34">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03516332575489587">
+									<True/>
+									<Node score="-0.03854482938732194">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="35">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03498491985948495">
+									<True/>
+									<Node score="-0.03822173617339457">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="36">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.034813538981187185">
+									<True/>
+									<Node score="-0.03791341827533257">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="37">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.034648844918440266">
+									<True/>
+									<Node score="-0.03761901168145015">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="38">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03449052599167866">
+									<True/>
+									<Node score="-0.03733771656358799">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="39">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03433828783542587">
+									<True/>
+									<Node score="-0.03706879301844741">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="40">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03419184667792023">
+									<True/>
+									<Node score="-0.036811558729917176">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.03419184667792024">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="41">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03405094127148883">
+									<True/>
+									<Node score="-0.036565372907684884">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="42">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03391532510752134">
+									<True/>
+									<Node score="-0.03632964379250783">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.03391532510752135">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="43">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.033784761429407284">
+									<True/>
+									<Node score="-0.03610381672846814">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="44">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03365903087921274">
+									<True/>
+									<Node score="-0.03588737631360344">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="45">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.033537919939057484">
+									<True/>
+									<Node score="-0.03567984257180807">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="46">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.033421234044644095">
+									<True/>
+									<Node score="-0.03548075876529163">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="47">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03330878227120461">
+									<True/>
+									<Node score="-0.035289706804287994">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="48">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03320038467595122">
+									<True/>
+									<Node score="-0.035106289966146384">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="49">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.033095876982730144">
+									<True/>
+									<Node score="-0.034930135838972566">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="50">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03299509222369407">
+									<True/>
+									<Node score="-0.034760897748795316">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="51">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03289788040868093">
+									<True/>
+									<Node score="-0.03459824969155957">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="52">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.032804098610801594">
+									<True/>
+									<Node score="-0.03444187789619625">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.03280409861080161">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="53">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03271360202125643">
+									<True/>
+									<Node score="-0.03429149529500446">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.03271360202125644">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="54">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03262626882865267">
+									<True/>
+									<Node score="-0.034146829826436444">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="55">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03254196448164802">
+									<True/>
+									<Node score="-0.034007619768137376">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="56">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03246057437554557">
+									<True/>
+									<Node score="-0.03387361980728595">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="57">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03238198757254676">
+									<True/>
+									<Node score="-0.03374460350400955">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="58">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03230609140399271">
+									<True/>
+									<Node score="-0.03362035223834998">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="59">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03223278300346861">
+									<True/>
+									<Node score="-0.03350065671132218">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="60">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03216196057779186">
+									<True/>
+									<Node score="-0.033385325061754734">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="61">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.0320935344796776">
+									<True/>
+									<Node score="-0.03327417223748766">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="62">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03202740831424567">
+									<True/>
+									<Node score="-0.033167019228828275">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="63">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.031963506824128636">
+									<True/>
+									<Node score="-0.033063701780349675">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="64">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03190173729649575">
+									<True/>
+									<Node score="-0.032964060579061163">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="65">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.0318420277748045">
+									<True/>
+									<Node score="-0.03286794626010653">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="66">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.0317842986343548">
+									<True/>
+									<Node score="-0.032775214124564404">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="67">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.031728475714800225">
+									<True/>
+									<Node score="-0.032685733107046415">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="68">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.0316744966730068">
+									<True/>
+									<Node score="-0.03259936537991152">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="69">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03162228567181604">
+									<True/>
+									<Node score="-0.03251599153352259">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="70">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03157178812627084">
+									<True/>
+									<Node score="-0.03243549741603452">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="71">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03152294017588187">
+									<True/>
+									<Node score="-0.03235776993367113">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="72">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03147568105355088">
+									<True/>
+									<Node score="-0.03228270087117962">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="73">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03142995658586409">
+									<True/>
+									<Node score="-0.0322101820221769">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="74">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03138571357322205">
+									<True/>
+									<Node score="-0.03214012890031951">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.03138571357322206">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="75">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03134289436887053">
+									<True/>
+									<Node score="-0.032072438112235015">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="76">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03130146075384981">
+									<True/>
+									<Node score="-0.03200702264924174">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="77">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03126135272095856">
+									<True/>
+									<Node score="-0.03194380345851445">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="78">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.031222528870752237">
+									<True/>
+									<Node score="-0.03188269032997856">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="79">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.031184950936604575">
+									<True/>
+									<Node score="-0.03182361239244971">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="80">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.031148569083698712">
+									<True/>
+									<Node score="-0.03176649359034516">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="81">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03111334393167307">
+									<True/>
+									<Node score="-0.03171125958756371">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="82">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03107923880178005">
+									<True/>
+									<Node score="-0.031657843739642866">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="83">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.031046209963417355">
+									<True/>
+									<Node score="-0.03160618216664518">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="84">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.031014227947705603">
+									<True/>
+									<Node score="-0.03155621188229501">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="85">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030983254718782438">
+									<True/>
+									<Node score="-0.031507870286571704">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.030983254718782452">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="86">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030953259686877694">
+									<True/>
+									<Node score="-0.0314611005772411">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.030953259686877708">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="87">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03092420409344842">
+									<True/>
+									<Node score="-0.031415848273312987">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="88">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030896060389255037">
+									<True/>
+									<Node score="-0.031372059705363914">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="89">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03086880001307461">
+									<True/>
+									<Node score="-0.03132968305798144">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="90">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030842391843523203">
+									<True/>
+									<Node score="-0.031288672242094306">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="91">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03081680636017153">
+									<True/>
+									<Node score="-0.03124897331492579">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.030816806360171544">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="92">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030792016743325604">
+									<True/>
+									<Node score="-0.03121054932405525">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="93">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030768004426631076">
+									<True/>
+									<Node score="-0.03117335115410802">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="94">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03074473431227785">
+									<True/>
+									<Node score="-0.031137336638840815">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="95">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030722184953826826">
+									<True/>
+									<Node score="-0.031102468623965335">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.030722184953826847">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="96">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.03070033582930433">
+									<True/>
+									<Node score="-0.031068709284906">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="97">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.0306791601086364">
+									<True/>
+									<Node score="-0.031036014380814464">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="98">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030658640384765262">
+									<True/>
+									<Node score="-0.03100435381144795">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.03065864038476527">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="99">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030638753737238837">
+									<True/>
+									<Node score="-0.0309736946408343">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.030638753737238844">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+						<Segment id="100">
+							<True/>
+							<TreeModel functionName="regression" missingValueStrategy="none" noTrueChildStrategy="returnLastPrediction" splitCharacteristic="multiSplit">
+								<MiningSchema>
+									<MiningField name="petal_length"/>
+								</MiningSchema>
+								<Node score="0.030619479886848176">
+									<True/>
+									<Node score="-0.030943995055443898">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="2.4500000000000006"/>
+									</Node>
+									<Node score="0.030619479886848183">
+										<SimplePredicate field="petal_length" operator="greaterThan" value="1.4500000000000002"/>
+									</Node>
+								</Node>
+							</TreeModel>
+						</Segment>
+					</Segmentation>
+				</MiningModel>
+			</Segment>
+			<Segment id="2">
+				<True/>
+				<RegressionModel functionName="classification" normalizationMethod="none">
+					<MiningSchema>
+						<MiningField name="_target" usageType="target"/>
+						<MiningField name="transformedLgbmValue"/>
+					</MiningSchema>
+					<Output>
+						<OutputField name="probability(0)" optype="continuous" dataType="double" feature="probability" value="0"/>
+						<OutputField name="probability(1)" optype="continuous" dataType="double" feature="probability" value="1"/>
+					</Output>
+					<RegressionTable intercept="0.0" targetCategory="1">
+						<NumericPredictor name="transformedLgbmValue" coefficient="1.0"/>
+					</RegressionTable>
+					<RegressionTable intercept="0.0" targetCategory="0"/>
+				</RegressionModel>
+			</Segment>
+		</Segmentation>
+	</MiningModel>
+</PMML>
